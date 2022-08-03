@@ -1,6 +1,7 @@
 package org.example;
 
 import org.apache.dubbo.common.stream.StreamObserver;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.dubbo.rpc.RpcContext;
 import org.apache.dubbo.rpc.protocol.tri.ServerStreamObserver;
 import org.apache.dubbo.sample.tri.DubboGreeterTriple.GreeterImplBase;
@@ -12,11 +13,16 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
+@DubboService
 public class GreeterImpl extends GreeterImplBase {
     private static final Logger LOGGER = LoggerFactory.getLogger(GreeterImpl.class);
 
     private final String serverName;
     public static final Map<String, Boolean> cancelResultMap = new HashMap<>();
+
+    public GreeterImpl() {
+        this.serverName = "default-server";
+    }
 
     public GreeterImpl(String serverName) {
         this.serverName = serverName;
